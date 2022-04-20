@@ -1,0 +1,26 @@
+<div class="mt-4">
+    <h3>Cập nhật sản phẩm</h3>
+    <form class="mt-4" method="post" action="/products/{{product._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Tên sản phẩm</label>
+            <input type="text" class="form-control" value="{{product.name}}" id="name" name = "name">
+        </div>
+        <div class="form-group">
+            <label for="decription">Miêu tả</label>
+            <textarea type="text" class="form-control" id="decription" name = "decription">{{product.decription}}</textarea>
+        </div>
+        <div class="form-group">
+            <label for="price">Giá bán</label>
+            <input type="text" class="form-control" value="{{product.price}}" id="price" name = "price">
+        </div>
+        <div class="form-group">
+            <label for="quantity">Số lượng</label>
+            <input type="text" class="form-control" value="{{product.quantity}}" id="quantity" name = "quantity">
+        </div>
+        <div class="form-group">
+            <label for="img">Chọn ảnh</label>
+            <input type="file" name = "img" class="form-control-file" value="{{product.img}}" id="img">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu</button>
+    </form>
+</div>

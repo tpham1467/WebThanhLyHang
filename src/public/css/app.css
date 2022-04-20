@@ -1,0 +1,244 @@
+.test {
+  font-size: 12px;
+  background-color: #fff;
+}
+
+h1 {
+  color: red;
+}
+
+.slide {
+  display: block;
+  width: 100%;
+  padding: 0;
+}
+
+.slide-wrap {
+  position: relative;
+  width: 100%;
+  height: 448px;
+  /* margin-top: var(--header-height); */
+  background-image: url(../img/Slide2.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.product-box {
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+  text-align: left;
+  margin-top: 14px;
+  background-color: var(--white-color);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.product-box:hover {
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.product-thumbnail {
+  margin: 0 0 10px;
+  overflow: hidden;
+}
+
+.product-img {
+  padding-top: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.product-info {
+  text-align: center;
+  z-index: 10;
+  padding: 0 15px 20px;
+  color: #42210b;
+}
+
+.product-name {
+  font-size: 15px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  margin-bottom: 32px;
+}
+
+.price-box {
+  font-weight: 400;
+  font-size: 15px;
+  overflow: hidden;
+  line-height: 23px;
+}
+
+.footer {
+  border-top: 4px solid var(--primary-color);
+  background-color: #2e2d2d;
+  margin-top: 32px;
+  width: 100%;
+}
+
+.footor-heading {
+  font-size: 16px;
+  margin: 16px 16px;
+  color: #FFF;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.footer-list {
+  padding-left: 16px;
+  list-style: none;
+}
+
+.footer-item-link {
+  text-decoration: none;
+  font-size: 14px;
+  color: #fff;
+  padding: 6px 0;
+  display: block;
+}
+
+.footer-item-link:hover {
+  color: #ccc;
+}
+
+.footer-down-app {
+  display: flex;
+}
+
+.footer-app-down-qr {
+  width: 80px;
+  border: 1px solid #fff;
+}
+
+.footer-download-link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 16px;
+}
+
+.footer-downlad-link-appstore {
+  height: 20px;
+  margin: 4px 0;
+}
+
+.footer-downlad-link-googleplay {
+  height: 20px;
+  margin: 4px 0;
+}
+
+.checkbox-all-options {
+  width: 160px;
+  margin: 0 8px;
+}
+
+.main {
+  background: #f1f1f1;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 360px;
+  min-height: 100px;
+  padding: 32px 24px;
+  text-align: center;
+  background: #fff;
+  border-radius: 2px;
+  margin: 24px;
+  align-self: center;
+  box-shadow: 0 2px 5px 0 rgba(51, 62, 73, 0.1);
+}
+
+.form .heading {
+  font-size: 2rem;
+}
+
+.form .desc {
+  text-align: center;
+  color: #636d77;
+  font-size: 1.6rem;
+  font-weight: lighter;
+  line-height: 2.4rem;
+  margin-top: 16px;
+  font-weight: 300;
+}
+
+.form-group {
+  display: flex;
+  margin-bottom: 16px;
+  flex-direction: column;
+}
+
+.form-label,
+.form-message {
+  text-align: left;
+}
+
+.form-label {
+  font-weight: 700;
+  padding-bottom: 6px;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+}
+
+.form-control {
+  height: 40px;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.form-control:hover {
+  border-color: #1dbfaf;
+}
+
+.form-group.invalid .form-control {
+  border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+  color: #f33a58;
+}
+
+.form-message {
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  padding: 4px 0 0;
+}
+
+.form-submit {
+  outline: none;
+  background-color: #1dbfaf;
+  margin-top: 12px;
+  padding: 12px 16px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  width: 100%;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.form-submit:hover {
+  background-color: #1ac7b6;
+}
+
+.spacer {
+  margin-top: 36px;
+}
+
+.me-store-img {
+  width: 120px;
+  height: auto;
+}
+
+/*# sourceMappingURL=app.css.map */

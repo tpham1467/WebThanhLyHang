@@ -1,0 +1,35 @@
+
+<div class="slide">
+    <div class="slide-wrap">
+        <div class="slide-banner">
+            <div class="slide-img"></div>
+            <div class="slide-text">
+                <h2 class="slide-banner-title-1"></h2>
+                <h2 class="slide-banner-title-2"></h2>
+                <p class="slider-banner-des"></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+
+        {{#each products}}
+        <div class="col-lg-3 col-sm-6">
+            <div class="product-box">
+                <div class="product-thumbnail">
+                    <a href="/products/{{this.slug}}" class="product-link">
+                        <div style="background-image: url(/uploads/{{this.img}})" class="product-img"></div>
+                    </a>
+                </div>  
+                <div class="product-info">
+                    <p class="product-name">    
+                        {{this.name}}
+                    </p>
+                    <div class="price-box">{{this.price}}</div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

@@ -1,0 +1,38 @@
+{
+  "name": "clone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "watch": "sass src/recources/scss/app.scss src/public/css/app.css --watch",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleasehangry/WebThanhLyHang.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pleasehangry/WebThanhLyHang/issues"
+  },
+  "homepage": "https://github.com/pleasehangry/WebThanhLyHang#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "express-handlebars": "^5.1.0",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.2.7",
+    "mongoose-delete": "^0.5.4",
+    "mongoose-slug-generator": "^1.0.4",
+    "multer": "^1.4.4",
+    "multer-gridfs-storage": "^5.0.2",
+    "nodemon": "^2.0.15",
+    "sass": "^1.49.9"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}

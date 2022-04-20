@@ -1,0 +1,32 @@
+<div class="main">
+    <form action="" method="POST" class="form" id="loginForm">
+            <h3 class="heading">Thành viên Đăng Nhập</h3>
+            <p class="desc">Cùng nhau chia sẻ đồ dùng ❤️</p>
+        
+            <div class="spacer"></div>
+            <div class="form-group">
+              <label for="email" class="form-label">Email</label>
+              <input id="email" name="email" value = {{#if values}} "{{values.email}}" {{else}} "" {{/if}} type="text"  placeholder="VD: email@domain.com" class="form-control">
+              <span class="form-message"></span>
+            </div>
+        
+            <div class="form-group">
+              <label for="password" class="form-label">Mật khẩu</label>
+              <input id="password" name="password" value = {{#if values}} "{{values.password}}" {{else}} "" {{/if}} type="password" placeholder="Nhập mật khẩu" class="form-control">
+              <span class="form-message"></span>
+            </div>
+            {{#if errors}}
+              {{#each errors}}
+              <div class="alert alert-danger">{{this}}</div>
+              {{/each}}
+            {{/if}}
+
+            <div class="mt-4 d-flex">
+              <p>Chưa có tài khoản?</p>
+              <a href="/auth/register">Đăng Ký</a>
+            </div>
+        
+            <button class="form-submit">Đăng Nhập</button>
+          </form>
+        </div>
+</div>
