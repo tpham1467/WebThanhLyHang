@@ -12,8 +12,34 @@
     </div>
 </div>
 <div class="container">
+    <div class="slider-header mt-4 mb-4">
+        <div class="slider-header-now ml-4">
+            <i class="ti-home"></i>
+            <span> Trang Chủ</span>
+            <span>/ Sản phẩm mới</span>
+        </div>
+        <div class="filter-product">
+            <nav class="filter-product-search navbar navbar-light bg-light">
+                <form class="form-inline">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm</button>
+                </form>
+            </nav>
+             <div class="filter-product-sort nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-color" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Sắp sếp theo
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Giá thấp đến cao</a>
+                <a class="dropdown-item" href="#">Giá cao đến thấp</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="row">
-
         {{#each products}}
         <div class="col-lg-3 col-sm-6">
             <div class="product-box">
