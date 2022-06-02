@@ -1,6 +1,9 @@
 <form class="mt-4 container" name="container-form" method="post" action="/products/handle-form-actions">
   <div>
-    <h3>Sản phẩm của tôi</h3> 
+    <div class="div d-flex justify-content-between">
+      <h3>Sản phẩm của tôi</h3>
+      <a href="/products/create" class="btn btn-primary">Thêm Sản Phẩm</a>
+    </div>
     <a href="/me/trash/products">Thùng rác ({{deletedCount}})</a>
     <div class="mt-4 d-flex align-items-center">
       <div class="form-check">
@@ -46,11 +49,15 @@
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>{{this.price}}</td>
-                <td><img class="me-store-img" src="/uploads/{{this.img}}" alt=""></td>
+                <td>
+                  <a href="/products/{{this.slug}}" class="">
+                    <img class="me-store-img" src="/uploads/{{this.img}}" alt="{{this.name}}">
+                  </a>
+                </td>
                 <td>{{this.quantity}}</td>
                 <td>
-                    <a href="/products/{{this._id}}/edit" class="btn btn-link btn-primary">Sửa</a>
-                    <a href="" data-toggle="modal" data-target="#delete-product-modal" data-id ="{{this._id}}" class="btn btn-link btn-primary">Xóa</a>
+                    <a href="/products/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                    <a href="" data-toggle="modal" data-target="#delete-product-modal" data-id ="{{this._id}}" class="btn btn-warning">Xóa</a>
                 </td>
             </tr>
             {{else}}
@@ -87,13 +94,12 @@
 
 {{!-- Delete Hiden Form --}}
 <form name="delete-product-form" method="post">
-
 </form>
 
 <script>
     //
     document.addEventListener("DOMContentLoaded", function(){
-        var product_id
+        var product_id  
         var deleteForm = document.forms["delete-product-form"]
         var productItemCheckbox = $('input[name="productsIds[]"]')
         var checkAllSubBtn = $('.check-all-submit-btn')

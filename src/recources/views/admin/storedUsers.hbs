@@ -1,3 +1,7 @@
+
+
+<form name="restore-user-form" method="post"></form>
+<form name="delete-user-form" method="post"></form>
 <form name="container-form" class="mt-4 container" method="post" action="/users/handle-form-actions">
   <div>
     <a href="/admin/trash/users">Người dùng đã xóa</a>
@@ -40,7 +44,7 @@
                 <td>{{this.email}}</td>
                 <td>{{this.address}}</td>
                 <td>
-                    <a href="" data-toggle="modal" data-target="#delete-user-modal" data-id ="{{this._id}}" class="btn btn-link">Xóa</a>
+                    <a href="" data-toggle="modal" data-target="#delete-user-modal" data-id ="{{this._id}}" class="btn btn-warning">Xóa</a>
                 </td>
             </tr>
             {{else}}
@@ -76,9 +80,6 @@
 
 {{!-- Delete Hiden Form --}}
 
-
-<form name="restore-user-form" method="post"></form>
-<form name="delete-user-form" method="post"></form>
 <script>
     
     document.addEventListener("DOMContentLoaded", function(){

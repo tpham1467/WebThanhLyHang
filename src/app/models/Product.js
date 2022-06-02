@@ -11,6 +11,7 @@ const Product = new Schema({
     isChecked: { type: Boolean, require: true},
     quantity: {type: Number, require: true},
     userId: {type: String, require: true},
+    category: {type: String, require: true},
     img: {type: String, require: true},
     slug: { type: String, slug: "name", unique: true},
 },{

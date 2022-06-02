@@ -1,14 +1,7 @@
-{{!-- Delete Hiden Form --}}
-<form name="delete-product-form" method="post">
-
-</form>
-<form name="check-pending-product-form" method="post">
-
-</form>
-<form class="mt-4 container" name="container-form" method="post" action="/products/handle-form-actions">
+<form name="delete-product-cart-form" method="post"></form>
+<form class="mt-4 container" name="container-form" method="post" action="/me/handle-form-actions">
   <div>
-    <h3>Sản phẩm đang chờ</h3> 
-    <a href="/admin/deleted-pending-products">Sản phẩm không được duyệt ({{deletedCount}})</a>
+    <h3>Giỏ hàng</h3>
     <div class="mt-4 d-flex align-items-center">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
@@ -18,8 +11,8 @@
       </div>
       <select name="action" class="form-control form-control-sm checkbox-all-options" required>
         <option value="">--Chọn hành động</optionv>
-        <option value="delete">Xóa</option>
-        <option Value="check">Duyệt</option>
+        <option value="forceDelete">Xóa</option>
+        <option>...</option>
       </select>
       <button class="btn btn-primary btn-sm check-all-submit-btn" disabled>Thực hiện</button>
     </div>
@@ -47,7 +40,7 @@
             <tr>
                 <td>
                   <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="productsIds[]" value="{{this._id}}">
+                  <input class="form-check-input" type="checkbox" name="productsIds[]" value="{{this.orderDetailId}}">
                   </div>  
                 </td>
                 <th scope="row">{{sum @index 1}}</th>
@@ -58,17 +51,19 @@
                     <img class="me-store-img" src="/uploads/{{this.img}}" alt="{{this.name}}">
                   </a>
                 </td>
-                <td>{{this.quantity}}</td>
+                {{!-- <td>{{this.quantity}}</td> --}}
+                <td>{{this.ODQtt}}</td>
                 <td>
-                    <a href="" data-id ="{{this._id}}"  class="btn btn-primary btn-check">Duyệt</a>
-                    <a href="" data-toggle="modal" data-target="#delete-product-modal" data-id ="{{this._id}}" class="btn btn-warning">Xóa</a>
+                  <button type="button" class="btn btn-primary" data-toggle="modal" data-id ="{{this.orderDetailId}}" data-target="#buy-modal">
+                    Mua
+                  </button>
+                    <a href="" data-toggle="modal" data-target="#delete-product-cart-modal" data-id ="{{this.orderDetailId}}" class="btn btn-danger">Xóa</a>
                 </td>
             </tr>
             {{else}}
             <tr>
               <td colspan="5" class="text-center">
-                Chưa có ai đăng sản phẩm
-                <a href="/">Trờ về trang chủ</a>
+                Bạn chưa thêm sản phẩm nào vào giỏ hàng
               </td>
             </tr>
             {{/each}}
@@ -76,7 +71,7 @@
     </table>
 </form>
     {{!-- Delete modal --}}
-<div id="delete-product-modal" class="modal" tabindex="-1" role="dialog">
+<div id="delete-product-cart-modal" class="modal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -86,52 +81,76 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Bạn chắc chắn muốn xóa sản phẩm này?</p>
+        <p>Bạn chắc chắn muốn xóa sản phẩm này khỏi giỏ hàng?</p>
       </div>
       <div class="modal-footer">
-        <button id="btn-delete-product" type="button" class="btn btn-danger">Xóa bỏ</button>
+        <button id="btn-delete-product-cart" type="button" class="btn btn-danger">Xóa bỏ</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
       </div>
     </div>
   </div>
 </div>
 
+{{!-- Buy modal --}}
+<div class="modal fade" id="buy-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <form name="add-order-product-form" action="/me/addOrder" method="post" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Mua sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Bạn chắc chắn muốn mua sản phẩm này? Người bán sẽ liên lạc với bạn.</p>
+          <div class="form-group" style="display: none;">
+            <input type="password" class="form-control" id="orderDetailId" name = "orderDetailId">
+          </div>
+        </div>
+      <div class="modal-footer">
+        <button id="btn-add-order" type="button" class="btn btn-success">Xác nhận</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 
 <script>
     //
     document.addEventListener("DOMContentLoaded", function(){
-        var product_id
-        var deleteForm = document.forms["delete-product-form"]
-        var checkPendingForm = document.forms["check-pending-product-form"]
+        var orderDetail_id
+        var inputODID = document.getElementById("orderDetailId")
+        var deleteForm = document.forms["delete-product-cart-form"]
+        var addODForm = document.forms["add-order-product-form"]
         var productItemCheckbox = $('input[name="productsIds[]"]')
         var checkAllSubBtn = $('.check-all-submit-btn')
-        var containerForm = $('form[name="container-form"]')
         var checkboxAll = $('#checkbox-all')
-        $("#delete-product-modal").on('show.bs.modal', function(event){
-        var button = $(event.relatedTarget);
-        product_id = button.data("id");
+        console.log(deleteForm)
+        console.log(addODForm)
+
+        $("#delete-product-cart-modal").on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          orderDetail_id = button.data("id");
         })
-        // deleting product
-        var btnDeleteProduct = document.getElementById("btn-delete-product")
-        btnDeleteProduct.onclick = function(){
-            console.log(product_id);
-            deleteForm.action = "/products/" + product_id + "?_method=DELETE";
+        $("#buy-modal").on('show.bs.modal', function(event){
+          var button = $(event.relatedTarget);
+          orderDetail_id = button.data("id");
+        })
+        //Delete product from cart
+        var btnDeleteProductCart = document.getElementById("btn-delete-product-cart")
+        btnDeleteProductCart.onclick = function(e){
+            e.preventDefault()
+            deleteForm.action = "/me/hideFromCart/" + orderDetail_id + "/force?_method=DELETE";
             deleteForm.submit()
         }
-        // checking product
-        var checkBtnAll = document.querySelectorAll('.btn-check');
-        checkBtnAll.forEach((checkBtn) => {
-        checkBtn.addEventListener('click', (e) => {
+        //add product to orders
+        var btnAddProduct = document.getElementById("btn-add-order")
+        btnAddProduct.onclick = function(e){
             e.preventDefault()
-
-            var productId = checkBtn.getAttribute('data-id')
-            console.log(productId)
-            checkPendingForm.action = "/products/" + productId + "/check?_method=PATCH";
-            checkPendingForm.submit()
-            });
-        });
-
+            inputODID.setAttribute("value", orderDetail_id);
+            addODForm.submit()
+        }
         // when the checkbox all click
         checkboxAll.change(function(){
           var isChecked = $(this).prop("checked")

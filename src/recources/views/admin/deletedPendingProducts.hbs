@@ -1,3 +1,7 @@
+
+<form name="restore-product-form" method="post"></form>
+<form name="delete-product-form" method="post"></form>
+
 <form name="container-form" class="mt-4 container" method="post" action="/products/handle-form-actions">
   <div>
     <a href="/admin/pending-products">Sản phẩm đang chờ</a>
@@ -41,8 +45,8 @@
                 <td>{{this.price}}</td>
                 <td>{{this.quantity}}</td>
                 <td>
-                    <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi phục</a>
-                    <a href="" data-toggle="modal" data-target="#delete-product-modal" data-id ="{{this._id}}" class="btn btn-link">Xóa Vĩnh Viễn</a>
+                    <a href="" class="btn btn-primary btn-restore" data-id="{{this._id}}">Khôi phục</a>
+                    <a href="" data-toggle="modal" data-target="#delete-product-modal" data-id ="{{this._id}}" class="btn btn-danger">Xóa Vĩnh Viễn</a>
                 </td>
             </tr>
             {{else}}
@@ -79,8 +83,6 @@
 {{!-- Delete Hiden Form --}}
 
 
-<form name="restore-product-form" method="post"></form>
-<form name="delete-product-form" method="post"></form>
 <script>
     
     document.addEventListener("DOMContentLoaded", function(){

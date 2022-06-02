@@ -49,6 +49,24 @@ app.engine('hbs', handlebars({
       <span class="${icon}"></span>
       </a>`
     },
+    sorttableHome: (fieldname, sort, byorder) => {
+      const sortType = fieldname === sort.column ? sort.type : 'default'
+      const icons = {
+        default: 'oi oi-elevator',
+        desc: 'oi oi-sort-ascending',
+        asc: 'oi oi-sort-descending',
+      }
+      const types = {
+        default: 'desc',
+        desc: 'asc',
+        asc: 'desc',
+      }
+      const icon = icons[sortType]
+      const type = types[sortType]
+      return `<a class="dropdown-item" href="?_sort&column=${fieldname}&type=${type}">
+      ${byorder} <span class="${icon}"></span>
+      </a>`
+    }
   }
 }));
 

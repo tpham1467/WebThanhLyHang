@@ -1,20 +1,34 @@
 <div class="mt-4 container">
-    <h3>Cập nhật sản phẩm</h3>
+    <h3>Thêm sản phẩm</h3>
     <form class="mt-4" method="post" action="/products/store" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Tên sản phẩm</label>
             <input type="text" class="form-control" id="name" name = "name">
         </div>
         <div class="form-group">
-            <label for="decription">Miêu tả</label>
-            <textarea type="text" class="form-control" id="decription" name = "decription">{{product.decription}}</textarea>
+            <label for="description">Miêu tả</label>
+            <textarea type="text" class="form-control" id="description" name = "description">{{product.description}}</textarea>
         </div>
-        <select name="category" class="form-control form-control-sm checkbox-all-options" required>
-        <option value="">--Chọn loại sản phẩm</optionv>
-        <option value="625fe96bfb44ca398e6c4326">Đồ gia dụng</option>
-        <option value="625fea86fb44ca398e6c4327">Đồ điện tử</option>
-        <option>...</option>
-        </select>
+        <div class="form-group">
+            <label for="decription">Chọn loại mặt hàng</label>
+            <select name="category" class="form-control" required>
+                <option value="">--Chọn loại sản phẩm</optionv>
+                <option value="thiet-bi-dien-tu">Đồ gia dụng</option>
+                <option value="dong-ho">Đồng Hồ</option>
+                <option Value="giay-dep-nam">Giày Dép Nam</option>
+                <option Value="thiet-bi-dien-da-dung">Thiết Bị Điện Gia Dụng</option>
+                <option Value="the-thao-du-lich">Thể Thao & Du Lịch</option>
+                <option Value="xe-may-xe-dap">Xe Máy & Xe Đạp</option>
+                <option Value="me-be">Mẹ & Bé</option>
+                <option Value="nha-cua-doi-song">Nhà Cửa & Đời Sống</option>
+                <option Value="giay-dep-nu">Giày Dép Nữ</option>
+                <option Value="tui-vi-nu">Túi Ví Nữ</option>
+                <option Value="phu-kien-trang-suc-nu">Phụ Kiện & Trang Sức Nữ</option>
+                <option Value="sach">Sách</option>
+                <option Value="do-choi">Đồ Chơi</option>
+                <option Value="khac">Khác</option>
+            </select>
+        </div>
         <div class="form-group">
             <label for="price">Giá bán</label>
             <input type="text" class="form-control" id="price" name = "price">

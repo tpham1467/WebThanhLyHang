@@ -1,93 +1,96 @@
 <header class="header">
-            {{#if user}}
-            <div class="header-wrap">
-                <a href="/" class="home-btn">
-                <img src="https://i.pinimg.com/736x/07/66/3f/07663f5ad340683b6cdd8f0b73a95416.jpg" alt="" class="header-img">
-                </a>
-                <div class="header-nav-bar">
-                    <ul class="header-nav-bar-list">
-                        <li class="header-nav-bar-item">
-                            <a href="/" class="header-nav-bar-item-link active-color">Trang chủ</a>
-                        </li>
-                        <li class="header-nav-bar-item">
-                            <a href="/news" class="header-nav-bar-item-link">Bài đăng</a>
-                        </li>
-                        <li class="header-nav-bar-item">
-                            <a href="/news" class="header-nav-bar-item-link">Loại Mặt Hàng</a>
-                            <div class="Pages_nav_bar">
-                                <div class="header-item_subnav grid">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <ul class="header-item_subnav-list">
-                                                <li class="all-item">About Us</li>
-                                                <li class="all-item">What We Offer</li>
-                                                <li class="all-item">Contact Us</li>
-                                                <li class="all-item">Comming Soon</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <ul class="header-item_subnav-list">
-                                                <li class="all-item">About Us</li>
-                                                <li class="all-item">What We Offer</li>
-                                                <li class="all-item">Contact Us</li>
-                                                <li class="all-item">Comming Soon</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <ul class="header-item_subnav-list">
-                                                <li class="all-item">About Us</li>
-                                                <li class="all-item">What We Offer</li>
-                                                <li class="all-item">Contact Us</li>
-                                                <li class="all-item">Comming Soon</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-lg-3">
-                                            <ul class="header-item_subnav-list">
-                                                <li class="all-item">About Us</li>
-                                                <li class="all-item">What We Offer</li>
-                                                <li class="all-item">Contact Us</li>
-                                                <li class="all-item">Comming Soon</li>
-                                            </ul>
-                                        </div>
+    {{#if user}}
+    <div class="header-wrap">
+        <a href="/" class="home-btn">
+        <img src="https://i.pinimg.com/736x/07/66/3f/07663f5ad340683b6cdd8f0b73a95416.jpg" alt="" class="header-img">
+        </a>
+        <div class="header-nav-bar">
+            <ul class="header-nav-bar-list">
+                <li class="header-nav-bar-item">
+                    <a href="/" class="header-nav-bar-item-link active-color">Trang chủ</a>
+                </li>
+                <li class="header-nav-bar-item">
+                    <a href="/news" class="header-nav-bar-item-link">Bài đăng</a>
+                </li>
+                <li class="header-nav-bar-item">
+                    <a href="#" class="header-nav-bar-item-link">Loại Mặt Hàng</a>
+                    <div class="Pages_nav_bar">
+                        <div class="header-item_subnav grid">
+                            <div class="row">
+                                {{#each categories}}
+                                <div class="col-lg-3 py-1">
+                                    <div class="header-item_subnav-list">
+                                        <a class="all-item" href="/categories/{{this.slug}}">{{this.name}}</a>
                                     </div>
+                                </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <ul class="header-btn-list">
+            <li class="header-btn-item">
+                <a href="/me/cart/products" class="header-btn-cart"><i class="ti-shopping-cart"></i></a>
+                <div class="header_cart-item">
+                    {{#if cartItems}}
+                    <h4 class="header-cart-heading">Sản phẩm đã thêm</h4>
+                    <ul class="header-cart-list-item">
+                        {{#each cartItems}}
+                        <li class="header-cart-item">
+                            <img src="/uploads/{{this.img}}" alt="" class="header-cart-item-img">
+                            <div class="header-cart-item-info">
+                                <div class="header-cart-item-head">
+                                    <h5 class="header-cart-item-name">{{this.name}}</h5>
+                                    <div class="header-cart-item-price-wrap">
+                                        <span class="header-cart-item-price">{{this.price}}</span>
+                                        <span class="header-cart-item-multi">x</span>
+                                        <span class="header-cart-item-qtt">{{this.quantity}}</span>
+                                    </div>
+                                </div>
+                                <div class="header-cart-item-body">
+                                    <span class="header-cart-item-decrip">{{this.description}}</span>
+                                    <span class="header-cart-item-remove">Xóa</span>
                                 </div>
                             </div>
                         </li>
+                        {{/each}}
                     </ul>
+                    <a href="/me/cart/products" class="header-cart-item-view btn btn-outline-success my-2">Xem giỏ hàng</a>
+                    {{else}}
+                    <img src="/img/cart-empty.png" alt="" class="header_cart-item-empty-img"/>
+                    <span class="header_cart-item-empty-title">No item in cart</span>
+                    {{/if}}
                 </div>
-                <ul class="header-btn-list">
-                    <li class="header-btn-item">
-                        <a href="" class="header-btn-cart"><i class="ti-shopping-cart"></i></a>
-                        <div class="header_cart-item">
-                            <img src="/img/cart-empty.png" alt="" class="header_cart-item-empty-img"/>
-                            <span class="header_cart-item-empty-title">No item in cart</span>
-                        </div>
+                
+            </li>
+            <li class="header-btn-item">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown inline-display">
+                    <img class="img-user-avat-header" src="{{user.avatar}}" alt="">
+                    <a class="nav-link dropdown-toggle inline-display" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.name}}
+                    </a>
+                    <div class="dropdown-menu text-lg" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/users/{{user.slug}}">Trang cá nhân</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/products/create">Thêm sản phẩm</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/me/stored/products">Sản phẩm của tôi</a>
+                        <a class="dropdown-item" href="/me/orders">Quản lý đơn hàng</a>
+                        <div class="dropdown-divider"></div>
+                        {{#if user.isAdmin}}
+                        <a class="dropdown-item" href="/admin/stored/users">Quản lý người dùng</a>
+                        <a class="dropdown-item" href="/admin/pending-products">Duyệt sản phẩm</a>
+                        <div class="dropdown-divider"></div>
+                        {{/if}}
+                        <a class="dropdown-item logout-btn" href="?logout">Đăng Xuất</a>
+                    </div>
                     </li>
-                    <li class="header-btn-item">
-                        <ul class="navbar-nav">
-                          <li class="nav-item dropdown inline-display">
-                            <img class="img-user-avat-header" src="{{user.avatar}}" alt="">
-                            <a class="nav-link dropdown-toggle inline-display" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{user.name}}
-                            </a>
-                            <div class="dropdown-menu text-lg" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="/users/{{user.slug}}">Trang cá nhân</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="/products/create">Thêm sản phẩm</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="/me/stored/products">Sản phẩm của tôi</a>
-                              <div class="dropdown-divider"></div>
-                              {{#if user.isAdmin}}
-                              <a class="dropdown-item" href="/admin/stored/users">Quản lý người dùng</a>
-                              <a class="dropdown-item" href="/admin/pending-products">Duyệt sản phẩm</a>
-                              <div class="dropdown-divider"></div>
-                              {{/if}}
-                              <a class="dropdown-item logout-btn" href="?logout">Đăng Xuất</a>
-                            </div>
-                          </li>
-                        </ul> 
-                    </li>
-                </ul>
-            </div>
-            {{/if}}
-        </header> 
+                </ul> 
+            </li>
+        </ul>
+    </div>
+    {{/if}}
+</header> 

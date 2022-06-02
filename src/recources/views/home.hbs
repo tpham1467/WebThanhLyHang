@@ -1,27 +1,39 @@
 
-<div class="slide">
-    <div class="slide-wrap">
-        <div class="slide-banner">
-            <div class="slide-img"></div>
-            <div class="slide-text">
-                <h2 class="slide-banner-title-1"></h2>
-                <h2 class="slide-banner-title-2"></h2>
-                <p class="slider-banner-des"></p>
-            </div>
-        </div>
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div style="background-image: url(/img/Slide2.jpg)" class="slide-wrap d-block w-100"></div>
     </div>
+    <div class="carousel-item">
+        <div style="background-image: url(/img/slide1.jpg)" class="slide-wrap d-block w-100"></div>
+    </div>
+    <div class="carousel-item">
+        <div style="background-image: url(/img/slide3.jpg)" class="slide-wrap d-block w-100"></div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
 <div class="container">
     <div class="slider-header mt-4 mb-4">
         <div class="slider-header-now ml-4">
             <i class="ti-home"></i>
             <span> Trang Chủ</span>
-            <span>/ Sản phẩm mới</span>
+            <span>/ Sản phẩm mới:</span>
+            <span>{{productsCount}}</span>
         </div>
         <div class="filter-product">
             <nav class="filter-product-search navbar navbar-light bg-light">
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Search">
+                <form class="form-inline" method="get" action="/search">
+                    <input class="form-control mr-sm-2"
+                    name="q" type="search" placeholder="Tìm kiếm sản phẩm"
+                    aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm</button>
                 </form>
             </nav>
@@ -30,16 +42,15 @@
                 Sắp sếp theo
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Giá thấp đến cao</a>
-                <a class="dropdown-item" href="#">Giá cao đến thấp</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
+                {{{sorttableHome 'price' _sort 'Giá sản phẩm'}}} 
+                {{{sorttableHome 'updatedAt' _sort 'Thời gian đăng bán'}}}
                 </div>
             </div>
         </div>
     </div>
     
     <div class="row">
+        {{#if products}}
         {{#each products}}
         <div class="col-lg-3 col-sm-6">
             <div class="product-box">
@@ -57,5 +68,10 @@
             </div>
         </div>
         {{/each}}
+        {{else}}
+        <p class="mx-auto">Chưa có sản phẩm!!
+            <a href="/products/create">Đăng sản phẩm</a>
+        </p>
+        {{/if}}
     </div>
 </div>

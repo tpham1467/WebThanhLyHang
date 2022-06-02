@@ -1,12 +1,61 @@
 const Product = require('../models/Product')
+const Comment = require('../models/Comment')
+const User = require('../models/User')
+const Category = require('../models/Category')
+const Order = require('../models/Order')
+const OrderDetail = require('../models/OrderDetail')
 const { mitipleMongooseToObject, mongooseToObject} = require('../../util/mongoose')
 class ProductsController {
     //[GET] /product/:slug
     show(req, res, next){
         Product.findOne({ slug: req.params.slug})
             .then(product => {
+                return Category.findOne({slug: product.category})
+                    .then(category => {
+                        return {
+                            category: mongooseToObject(category),
+                            product: mongooseToObject(product),
+                        }
+                    })
+                
+            })
+            .then((data) => {
+                return User.findById(data.product.userId)
+                    .then(user => {
+                        return {
+                            user: mongooseToObject(user),
+                            product: data.product,
+                            category: data.category,
+                        }
+                    })
+            })
+            .then((data) => {
+                return Comment.find({productId: data.product._id})
+                    .then(comments => {
+                        comments = mitipleMongooseToObject(comments)
+                        comments.forEach(function(comment){
+                            User.findById(comment.userId)
+                                .then(user => {
+                                    user = mongooseToObject(user)
+                                    Object.assign(comment, {
+                                        userName: user.name,
+                                        userAvat: user.avatar,
+                                        userSlug: user.slug
+                                    })
+                                })
+                        })
+                        return {
+                            user: data.user,
+                            product: data.product,
+                            category: data.category,
+                            comments
+                        }
+                    })
+            })
+            .then(data => {
+                console.log(data)
                 res.render('products/show',{
-                    product: mongooseToObject(product)
+                    data
                 })
             })
             .catch(next)
@@ -44,13 +93,21 @@ class ProductsController {
     }
     //[Delete] /product/:id
     destroy(req, res, next) {
-        Product.delete({_id: req.params.id})
-            .then(() => res.redirect("back"))
+        var arr = []
+        OrderDetail.find({productId: req.params.id})
+            .then( ODs => {
+                ODs.forEach(OD => arr.push(OD._id))
+                Promise.all([Product.delete({_id: req.params.id}),
+                    OrderDetail.deleteMany({_id: {$in: arr}}),
+                    Order.deleteMany({orderDetailId: {$in: arr}})])
+                    .then(() => res.redirect("back"))
+                    .catch(next)
+            })
             .catch(next)
     }
     //[Delete] /product/:id/force
-    forceDestroy(req, res, next) {
-        Product.deleteOne({_id: req.params.id})
+    async forceDestroy(req, res, next) {
+        await Product.deleteOne({_id: req.params.id})
             .then(() => res.redirect("back"))
             .catch(next)
     }
@@ -71,17 +128,28 @@ class ProductsController {
     handleFormActions(req, res, next) {
         switch(req.body.action){
             case 'delete':
-                Product.delete({_id: { $in: req.body.productsIds }})    
-                .then(() => res.redirect("back"))
-                .catch(next)
+                OrderDetail.find({productId: {$in: req.body.productsIds}})
+                    .then(ODs => {
+                        const arr = ODs.map(od => arr.push(od._id))
+                        Promise.all([Product.delete({_id: {$in: req.body.productsIds}}),
+                        OrderDetail.deleteMany({_id: {$in: arr}}),
+                        Order.deleteMany({orderDetailId: {$in: arr}})])
+                            .then(() => res.redirect("back"))
+                            .catch(next)
+                    })
+                    .catch(next)
                 break
             case 'forceDelete':
-                Product.deleteOne({_id: { $in: req.body.productsIds }})    
+                Product.deleteMany({_id: {$in: req.body.productsIds}})
+                .then(() => res.redirect("back"))
+                .catch(next)
+            case 'restore':
+                Product.restore({_id: { $in: req.body.productsIds }})    
                 .then(() => res.redirect("back"))
                 .catch(next)
                 break
-            case 'restore':
-                Product.restore({_id: { $in: req.body.productsIds }})    
+            case 'check':
+                Product.updateMany({_id: { $in: req.body.productsIds }}, {isChecked: true})
                 .then(() => res.redirect("back"))
                 .catch(next)
                 break
