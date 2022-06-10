@@ -70,7 +70,7 @@ class AuthController {
                 })
                 return;
             }
-            req.body.avatar = "https://thelifetank.com/wp-content/uploads/2018/08/avatar-default-icon.png"
+            req.body.avatar = "default-avatar.png"
             const formdata = {
                 name: req.body.name,
                 email: req.body.email,

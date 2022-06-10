@@ -7,7 +7,7 @@ class UsersController {
         User.findOne({ slug: req.params.slug})
             .then(user => {
                 res.render('users/show',{
-                    user: mongooseToObject(user)
+                    userC: mongooseToObject(user)
                 })
             })
             .catch(next)
@@ -22,14 +22,14 @@ class UsersController {
         const user = new User(formdata)
         user
             .save()
-            .then(() => res.redirect("/admin/stored/users"))
+            .then(() => res.redirect("/admin/stored/users"))    
             .catch((error) => {})
     }
     //[POST] /User/:id/edit 
     edit(req, res, next){
         User.findById(req.params.id)
             .then(user => res.render('users/edit', {
-                user: mongooseToObject(user)
+                userC: mongooseToObject(user)
             }))
             .catch(next)
     }

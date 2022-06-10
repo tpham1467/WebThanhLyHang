@@ -61,6 +61,7 @@ class NewsController {
     }
     //[post] /news/create
     create(req, res, next){
+        req.body.img = req.file.filename;
         req.body.userId = req.cookies.userId
         const news = new News(req.body)
         news

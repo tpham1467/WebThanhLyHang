@@ -14,15 +14,11 @@ class SiteController {
                 [req.query.column] : req.query.type,
             })
         }
-        var page = parseInt(req.query.page) || 1
-        var perPage = 8
-        var start = (page - 1) * perPage
-        var end = page * perPage
         Promise.all([productQuery,Product.countDocuments()])
         .then(([products, productsCount]) =>
             res.render('home', {
                 productsCount,
-                products: mitipleMongooseToObject(products).slice(start, end),
+                products: mitipleMongooseToObject(products)
             })
         )
         .catch(next);
@@ -30,11 +26,18 @@ class SiteController {
     }
     // [GET] /Search
     Search(req, res, next){
-        console.log(req.query.q);
-        Product.find({name: req.query.q})
-            .then(products => {
+        var s = req.query.q;
+        Product.find({})
+            .then(pros => {
+                const products = []
+                pros.forEach(product => {
+                    product = mongooseToObject(product)
+                    if(product.name.includes(s)){
+                        products.push(product)
+                    }
+                })
                 res.render('home', {
-                    products: mitipleMongooseToObject(products)
+                    products
                 })  
             })
             .catch(next)

@@ -1,26 +1,41 @@
-<div class="mt-4">
-    <h3>Cập nhật sản phẩm</h3>
-    <form class="mt-4" method="post" action="/products/{{product._id}}?_method=PUT">
-        <div class="form-group">
-            <label for="name">Tên sản phẩm</label>
-            <input type="text" class="form-control" value="{{product.name}}" id="name" name = "name">
+<div class="mt-4 container">
+    <div class="row">
+        <div class="col-4">
+            <div class="user-img">
+                <img class="user-img-show" src="/uploads/{{userC.avatar}}" alt="{{userC.name}}">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="decription">Miêu tả</label>
-            <textarea type="text" class="form-control" id="decription" name = "decription">{{product.decription}}</textarea>
+        <div class="col-8">
+            <div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <label for="inputGmail4">Gmail</label>
+                    <input type="email" name="email" value="{{userC.email}}"
+                         class="form-control" id="inputGmail4" placeholder="Gmail" readonly>
+                    </div>
+                    <div class="form-group col-md-6">
+                    <label for="inputName4">Họ Tên</label>
+                    <input type="text" name="name" value="{{userC.name}}"
+                         class="form-control" id="inputName4" placeholder="Name" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress">Địa chỉ</label>
+                    <input type="text" name="address" value="{{userC.address}}"
+                         class="form-control" id="inputAddress" placeholder="1234 Main St" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="inputFB">Facebook</label>
+                    <input type="text" name="facebook" value="{{userC.facebook}}" class="form-control" id="inputFB" readonly>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <label for="inputPhone">Điện Thoại</label>
+                    <input type="text" name="phone" value="{{userC.phone}}" class="form-control" id="inputPhone" readonly>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" disabled>Lưu thông tin</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="price">Giá bán</label>
-            <input type="text" class="form-control" value="{{product.price}}" id="price" name = "price">
-        </div>
-        <div class="form-group">
-            <label for="quantity">Số lượng</label>
-            <input type="text" class="form-control" value="{{product.quantity}}" id="quantity" name = "quantity">
-        </div>
-        <div class="form-group">
-            <label for="img">Chọn ảnh</label>
-            <input type="file" name = "img" class="form-control-file" value="{{product.img}}" id="img">
-        </div>
-        <button type="submit" class="btn btn-primary">Lưu</button>
-    </form>
+    </div>
 </div>

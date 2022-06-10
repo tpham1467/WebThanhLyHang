@@ -18,7 +18,7 @@ function route(app){
     app.use('/users', authMiddleware, usersRouter);
     app.use('/products', authMiddleware, productsRouter);
     app.use('/me', authMiddleware, meRouter);
-    app.use('/', authMiddleware, DTO, siteRouter);
+    app.use('/', authMiddleware, siteRouter);
 }
 
 module.exports = route;

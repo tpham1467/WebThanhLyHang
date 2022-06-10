@@ -88,6 +88,7 @@ h2 {
 }
 
 .header-nav-bar-list {
+  position: relative;
   list-style: none;
   padding-left: 0;
   display: flex;
@@ -114,6 +115,7 @@ h2 {
 
 .header-nav-bar-item-link:hover {
   color: var(--primary-color);
+  text-decoration: none;
 }
 
 .header-nav-bar-item:hover .header-item_subnav {

@@ -11,9 +11,9 @@
                 <h5 class="product-infor-show">Giá bán: {{data.product.price}}</h5>
                 <h5 class="product-infor-show">Loại: {{data.category.name}}</h5>
                 <h5 class="product-infor-show">Người đăng bán: 
-                  <a href="/users/{{user.slug}}" class="">{{data.user.name}}</a>
+                  <a href="/users/{{data.user.slug}}" class="">{{data.user.name}}</a>
                 </h5>
-                <h5 class="product-infor-show">Đăng lúc: {{data.product.createAt}}</h5>
+                <h5 class="product-infor-show">Đăng lúc: {{data.product.createdAt}}</h5>
                 <div class="form-group" style="display: none;">
                   <input type="password" class="form-control" value="{{data.product._id}}" id="productId" name = "productId">
                 </div>
@@ -37,16 +37,16 @@
               <ul class="coments-user-list">
                   <form action="/comments/store" class="post-cmts-form mb-3 d-flex" method="post" enctype="multipart/form">
                       <a href="/users/{{user.slug}}" class="user-link user-link-cmt">
-                          <img src="{{user.avatar}}" alt="" class="user-avat user-avat-cmt">
+                          <img src="/uploads/{{user.avatar}}" alt="" class="user-avat user-avat-cmt">
                       </a>
                       <input type="text" class="comment-submit-input" name="description" placeholder="Viết bình luận..." class="description-input">
-                      <input type="password" name="userId" value="{{user._id}}" style="display: none">
+                      <input type="password" name="userId" value="{{data.user._id}}" style="display: none">
                       <input type="text" name="productId" value="{{data.product._id}}" style="display: none">
                   </form>
                   {{#each data.comments}}
                     <li class="coments-user-item">
                         <a href="" class="user-link">
-                            <img src="{{this.userAvat}}" alt="" class="user-avat">
+                            <img src="/uploads/{{this.userAvat}}" alt="" class="user-avat">
                         </a>
                         <div class="coments-user-wrap">
                             <a href="/users/{{this.userSlug}}" class="user-link">{{this.userName}}</a>

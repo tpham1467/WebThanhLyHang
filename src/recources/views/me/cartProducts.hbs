@@ -12,7 +12,7 @@
       <select name="action" class="form-control form-control-sm checkbox-all-options" required>
         <option value="">--Chọn hành động</optionv>
         <option value="forceDelete">Xóa</option>
-        <option>...</option>
+        <option value="buy">Mua</option>
       </select>
       <button class="btn btn-primary btn-sm check-all-submit-btn" disabled>Thực hiện</button>
     </div>
@@ -126,8 +126,6 @@
         var productItemCheckbox = $('input[name="productsIds[]"]')
         var checkAllSubBtn = $('.check-all-submit-btn')
         var checkboxAll = $('#checkbox-all')
-        console.log(deleteForm)
-        console.log(addODForm)
 
         $("#delete-product-cart-modal").on('show.bs.modal', function(event){
           var button = $(event.relatedTarget);

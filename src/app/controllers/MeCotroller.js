@@ -177,6 +177,28 @@ class MeController {
                 .then(() => res.redirect("back"))
                 .catch(next)
                 break
+            case 'buy':
+                const arr = req.body.productsIds
+                for(let i = 0; i < arr.length; i++){
+                    OrderDetail.findOne({_id: arr[i]})
+                        .then(orderDetail => {
+                            Product.findOne({_id: orderDetail.productId})
+                                .then(product => {
+                                    var sellerId = product.userId
+                                    var orderDetailId = orderDetail._id;
+                                    req.body.sellerId = sellerId
+                                    req.body.orderDetailId = orderDetailId
+                                    const formdata = req.body;
+                                    const order = new Order(formdata)
+                                    order
+                                    .save()
+                                    .then(() => res.redirect("back"))
+                                    .catch((error) => {})
+                                    })
+                        })
+                        .catch(next)
+                }
+                break
             default:
                 res.json({message: "Action is invalid"})
         }

@@ -3,7 +3,7 @@
         <ul class="content">
             <div class="user-ifor">
                 <a href="/users/{{user.slug}}" id="user-slug-show" class="user-link">
-                    <img src="{{user.avatar}}" id="user-avatar-show" alt="" class="user-avat">
+                    <img src="/uploads/{{user.avatar}}" id="user-avatar-show" alt="" class="user-avat">
                 </a>
                 <button type="button" class="description-input btn btn-light" data-toggle="modal" data-target="#exampleModal">Bạn muốn đăng gì?</button>
             </div>
@@ -12,7 +12,7 @@
                 <div class="user-ifor">
                     <div class="user-ifor-wrap">
                         <a href="/users/{{this.data.user.slug}}" class="user-link">
-                            <img src="{{this.data.user.avatar}}" alt="" class="user-avat">
+                            <img src="/uploads/{{this.data.user.avatar}}" alt="" class="user-avat">
                         </a>
                         
                         <a href="/users/{{this.data.user.slug}}" class="user-link">{{this.data.user.name}}</a>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="news-content">
                     <p class="description">{{this.data.news.description}}</p>
-                    <img src="{{this.data.news.img}}" alt="" class="news-img">
+                    <img src="/uploads/{{this.data.news.img}}" alt="" class="news-img">
                 </div>
                 <div class="news-comments">
                     <div class="coments-btn">
@@ -52,8 +52,8 @@
                             </form>
                             {{#each this.comments}}
                             <li class="coments-user-item">
-                                <a href="" class="user-link">
-                                    <img src="{{this.userAvat}}" alt="" class="user-avat">
+                                <a href="/users/{{this.userSlug}}" class="user-link">
+                                    <img src="/uploads/{{this.userAvat}}" alt="" class="user-avat">
                                 </a>
                                 <div class="coments-user-wrap">
                                     <a href="/users/{{this.userSlug}}" class="user-link">{{this.userName}}</a>
@@ -89,10 +89,10 @@
       </div>
       <div class="modal-body">
         <a href="/users/{{user.slug}}" class="user-link">
-            <img src="{{user.avatar}}" alt="" class="user-avat">
+            <img src="/uploads/{{user.avatar}}" alt="" class="user-avat">
         </a>
         <a href="/users/{{user.slug}}" class="user-link">{{user.name}}</a>
-        <form action="/news/stored" method="post" enctype="multipart/form" class="add-new-news-form">
+        <form action="/news/stored" method="post" enctype="multipart/form-data" class="add-new-news-form">
             <textarea name="description" type="text" placeholder="Viết gì đó" class="news-form-input"></textarea>
             <div class="form-group news-form-input-file">
                 <label for="exampleFormControlFile1">Đăng ảnh nếu có</label>
@@ -139,7 +139,8 @@
         var userAvatCmts = document.querySelectorAll('.user-avat-cmt');
         var cmtForms = document.querySelectorAll('.post-cmts-form')
         var userSlug = `{{user.slug}}`
-        var userAvat = `{{user.avatar}}`
+        var userAvat = `/uploads/{{user.avatar}}`
+        console.log(userAvat)
         var cmtInputSubmits = document.querySelectorAll('.comment-submit-input')
         var deleteForm = document.forms["delete-news-form"]
         var deleteCmtForm = document.forms["delete-comment-form"]
@@ -161,12 +162,12 @@
             userlinkCmt.setAttribute("href", "/users/" + userSlug);
         })
         userAvatCmts.forEach(userAvatCmt => {
-            userAvatCmt.setAttribute('src', userAvat)
+            userAvatCmt.setAttribute('src',userAvat)
         })
         cmtInputSubmits.forEach(
             (cmtInputSubmit, i) => {
                 cmtInputSubmit.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") {
+                    if (event.key === "Enter" && this.value.length > 0) {
                         event.preventDefault();
                         cmtForms[i].submit();
                     }
@@ -175,8 +176,9 @@
         )
         // delete cmt
         $(".delete-cmt-btn").on('click', function(event){
-            comment_id = $(".delete-cmt-btn").data("id");
-            console.log(comment_id);
+            event.preventDefault()
+            var comment_id = $(this).data("id");
+            console.log(comment_id)
             deleteCmtForm.action = "/comments/" + comment_id + "/delete?_method=DELETE";
             deleteCmtForm.submit()
         })
