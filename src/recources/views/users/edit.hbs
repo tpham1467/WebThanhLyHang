@@ -1,8 +1,12 @@
 <div class="mt-4 container">
-    <div class="row">
+    <form name="EditUserForm" method="post" enctype="multipart/form-data" action="/users/{{userC._id}}?_method=PUT" class="row">
         <div class="col-4">
             <div class="user-img">
                 <img class="user-img-show" src="/uploads/{{userC.avatar}}" alt="{{userC.name}}">
+            </div>
+            <div class="form-group">
+                <label for="ImgAvat">Đổi ảnh đại diện</label>
+                <input type="file" name="avatar" class="form-control-file" id="ImgAvat">
             </div>
         </div>
         <div class="col-8">
@@ -34,8 +38,23 @@
                     <input type="text" name="phone" value="{{userC.phone}}" class="form-control" id="inputPhone" readonly>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" disabled>Lưu thông tin</button>
+                <button type="submit" class="btn btn-primary btn-submit" disabled>Lưu thông tin</button>
             </div>
         </div>
-    </div>
+    </form>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+        var inputForms = $('.form-control')
+        inputForms.click(function() {
+            $(this).attr('readonly', false)
+            $('.btn-submit').attr('disabled', false)
+        })
+        var editForm = document.forms["EditUserForm"]
+        console.log(editForm)
+        $('.btn-submit').click(function() {
+            editForm.submit()
+        })
+    })
+</script>

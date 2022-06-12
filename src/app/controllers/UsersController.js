@@ -35,8 +35,17 @@ class UsersController {
     }
     //[Put] /User/:id 
     update(req, res, next) {
+        if(!req.body.filename){
+            User.findOne({_id: req.params.id})
+                .then(user => {
+                    req.body.avatar = user.avatar
+                })
+        }
+        else{
+            req.body.avatar = req.file.filename;
+        }
         User.updateOne({_id: req.params.id}, req.body)
-            .then(() => res.redirect("/admin/stored/users"))
+            .then(() => res.redirect("back"))
             .catch(next)
     }
     //[Delete] /User/:id

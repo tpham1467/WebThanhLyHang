@@ -87,6 +87,15 @@ class ProductsController {
     }
     //[Put] /product/:id 
     update(req, res, next) {
+        if(!req.body.filename){
+            User.findOne({_id: req.params.id})
+                .then(user => {
+                    req.body.avatar = user.avatar
+                })
+        }
+        else{
+            req.body.avatar = req.file.filename;
+        }
         Product.updateOne({_id: req.params.id}, req.body)
             .then(() => res.redirect("/me/stored/products"))
             .catch(next)

@@ -11,6 +11,7 @@ const User = new Schema({
     isAdmin: {type: Boolean, require: true},
     phone: {type: String, require: true},
     avatar: {type: String, require: true},
+    facebook: {type: String, require: true},
     address: {type: String, require: true},
     slug: { type: String, slug: "name", unique: true},
 },{
