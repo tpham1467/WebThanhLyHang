@@ -3,25 +3,52 @@
     <form class="mt-4" method="post" action="/products/{{product._id}}?_method=PUT" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Tên sản phẩm</label>
-            <input type="text" class="form-control" value="{{product.name}}" id="name" name = "name">
+            <input type="text" class="form-control" value="{{product.name}}" id="name" name ="name">
         </div>
         <div class="form-group">
-            <label for="decription">Miêu tả</label>
-            <textarea type="text" class="form-control" id="decription" name = "decription">{{product.decription}}</textarea>
+            <label for="description">Miêu tả</label>
+            <textarea type="text" class="form-control" id="description" name = "description">{{product.description}}</textarea>
         </div>
-        <div class="form-group">
-            <label for="price">Giá bán</label>
-            <input type="text" class="form-control" value="{{product.price}}" id="price" name = "price">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Chọn loại mặt hàng</label>
+                <select name="category" class="form-control" required>
+                    <option value="">--Chọn loại sản phẩm</optionv>
+                    <option value="thiet-bi-dien-tu">Đồ gia dụng</option>
+                    <option value="dong-ho">Đồng Hồ</option>
+                    <option Value="giay-dep-nam">Giày Dép Nam</option>
+                    <option Value="thiet-bi-dien-da-dung">Thiết Bị Điện Gia Dụng</option>
+                    <option Value="the-thao-du-lich">Thể Thao & Du Lịch</option>
+                    <option Value="xe-may-xe-dap">Xe Máy & Xe Đạp</option>
+                    <option Value="me-be">Mẹ & Bé</option>
+                    <option Value="nha-cua-doi-song">Nhà Cửa & Đời Sống</option>
+                    <option Value="giay-dep-nu">Giày Dép Nữ</option>
+                    <option Value="tui-vi-nu">Túi Ví Nữ</option>
+                    <option Value="phu-kien-trang-suc-nu">Phụ Kiện & Trang Sức Nữ</option>
+                    <option Value="sach">Sách</option>
+                    <option Value="do-choi">Đồ Chơi</option>
+                    <option Value="khac">Khác</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="price">Giá bán</label>
+                <input type="text" class="form-control" value="{{product.price}}" id="price" name="price">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="quantity">Số lượng</label>
+                <input type="text" class="form-control" value="{{product.quantity}}" id="quantity" name="quantity">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="quantity">Số lượng</label>
-            <input type="text" class="form-control" value="{{product.quantity}}" id="quantity" name = "quantity">
-        </div>
+        {{#if errors}}
+        {{#each errors}}
+        <div class="alert alert-danger mt-2">{{this}}</div>
+        {{/each}}
+        {{/if}}
         <div class="form-group">
             <label for="img">Chọn ảnh</label>
             <img src="/uploads/{{product.img}}" class="me-store-img mb-1" alt="">
-            <input type="file" name = "img" class="form-control-file" value="{{product.img}}" id="img">
+            <input type="file" name = "img" class="form-control-file" id="img">
         </div>
-        <button type="submit" class="btn btn-primary">Lưu</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Lưu</button>
     </form>
 </div>

@@ -2,25 +2,10 @@
 <form name="container-form" class="mt-4 container" method="post" action="/products/handle-form-actions">
   <div>
     <h3>Đơn hàng</h3> 
-    <div class="mt-4 d-flex align-items-center">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkbox-all">
-        <label class="form-check-label" for="checkbox-all">
-          Chọn tất cả
-        </label>
-      </div>
-      <select name="action" class="form-control form-control-sm checkbox-all-options" required>
-        <option value="">--Chọn hành động</optionv>
-        <option value="forceDelete">Xóa Vĩnh Viễn</option>
-        <option value="restore">Khôi phục</option>
-      </select>
-      <button class="btn btn-primary btn-sm check-all-submit-btn" disabled>Thực hiện</button>
-    </div>
   </div>
     <table class="table mt-4">
         <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">#</th>
                 <th scope="col">Tên sản phẩm</th>
                 <th scope="col">Ảnh</th>
@@ -32,11 +17,6 @@
         <tbody>
             {{#each products}}
             <tr>
-                <td>
-                  <div class="form-check">
-                  <input class="form-check-input" type="checkbox" name="productsIds[]" value="{{this._id}}">
-                  </div>  
-                </td>
                 <th scope="row">{{sum @index 1}}</th>
                 <td>{{this.name}}</td>
                 <td>
