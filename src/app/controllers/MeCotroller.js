@@ -16,7 +16,7 @@ class MeController {
         [req.query.column]: req.query.type,
       });
     }
-    Promise.all([productQuery, Product.countDocumentsDeleted()])
+    Promise.all([productQuery, Product.countDocumentsDeleted({userId: req.cookies.userId})])
       .then(([products, deletedCount]) =>
         res.render("me/storedProducts", {
           deletedCount,

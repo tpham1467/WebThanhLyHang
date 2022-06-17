@@ -94,7 +94,7 @@ class ProductsController {
   }
   //[Put] /product/:id
   update(req, res, next) {
-    if (!req.body.filename) {
+    if (!req.file.filename) {
       Product.findOne({ _id: req.params.id }).then((product) => {
         req.body.img = product.img;
       });
