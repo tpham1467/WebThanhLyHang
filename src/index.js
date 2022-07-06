@@ -6,7 +6,7 @@ const path = require('path');
 const req = require('express/lib/request');
 const methodOverride = require('method-override');
 const app = express();
-const port = 3000;
+const port = 5000;
 
 const SortMiddleware = require('./app/middlewares/SortMiddleware');
 
